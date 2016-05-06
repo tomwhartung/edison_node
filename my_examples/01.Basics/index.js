@@ -3,7 +3,9 @@
 //    Chapter 2, Blink With JavaScript - Programming the Thing
 //
 var firmata = require( 'firmata' );
-var modem = '/dev/cu.usbserial-DJ008CEA';
+
+// var modem = '/dev/cu.usbserial-DJ008CEA';
+var modem = '/dev/usbmon0';
 
 //
 // Main part
