@@ -1,0 +1,17 @@
+#
+# Documentation is here: http://git-scm.com/docs/gitignore
+#
+tmp/
+#
+#  I switch between vi, netbeans, and eclipse
+#
+*.swp
+/nbproject/
+/.buildpath
+/.project
+/.settings/
+#
+# For using vi on the edison
+#
+.*.un~
+*~
