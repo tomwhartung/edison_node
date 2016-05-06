@@ -11,5 +11,8 @@
     "examples"
   ],
   "author": "Tom W Hartung",
-  "license": "GPL 3"
+  "license": "GPL 3",
+  "dependencies": {
+    "firmata": "^0.11.3"
+  }
 }
