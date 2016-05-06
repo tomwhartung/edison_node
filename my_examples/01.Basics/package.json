@@ -1,0 +1,15 @@
+{
+  "name": "01.Basics",
+  "version": "1.0.0",
+  "description": "Node equivalents or the best I can do of the sample Arduino sketches from aduino.cc .",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "arduino",
+    "examples"
+  ],
+  "author": "Tom W Hartung",
+  "license": "GPL 3"
+}
