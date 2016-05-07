@@ -24,26 +24,45 @@ var ledState = true;                  // Boolean to hold the state of Led
 // Functions
 //
 /**
- * Setup: called once in mainline code
+ * function to do absolutely nothing
+ */
+function doAbsolutelyNothing() {
+	console.log( 'I do nothing - absolutely nothing!' );
+}
+/**
+ * Wait the specified milliseconds then call a function that does absolutely nothing
+ */
+function sleepForMillisecs( millisecs ) {
+	var timeoutId = 0;
+	console.log( 'sleeping for ' + millisecs + ' milliseconds' );
+	timeoutId = setTimeout( doAbsolutelyNothing, millisecs );
+	clearTimeout( timeoutId );
+}
+/**
+ * setup: called once in mainline code
  */
 function setup() {
 	console.log('MRAA Version: ' + mraa.getVersion()); // write the mraa version to the Intel XDK console
 	myOnboardLed.dir(mraa.DIR_OUT); //set the gpio direction to output
 }
 /**
- * Setup: called indefinitely by mainline code
+ * loop: called indefinitely by mainline code
  */
 function loop() {
-  myOnboardLed.write(ledState?1:0); //if ledState is true then write a '1' (high) otherwise write a '0' (low)
-  ledState = !ledState; //invert the ledState
-  setTimeout(loop,1000); //call the indicated function after 1 second (1000 milliseconds)
+	// myOnboardLed.write(ledState?1:0); //if ledState is true then write a '1' (high) otherwise write a '0' (low)
+	// ledState = !ledState; //invert the ledState
+	// setTimeout(loop,1000); //call the indicated function after 1 second (1000 milliseconds)
+	myOnboardLed.write( 0 );
+	sleepForMillisecs( 1000 );
+	myOnboardLed.write( 0 );
+	sleepForMillisecs( 100 );
 }
 //
 // Mainline code
 //
 setup();
 //
-// while( true ) {
+while( true ) {
 	loop();
-// }
+}
 
