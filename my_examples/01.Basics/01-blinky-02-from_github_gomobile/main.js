@@ -145,13 +145,6 @@ function setup() {
  * dash dot   dash dash dash   dash dot dot   dot
  */
 function loop() {
-	// myOnboardLed.write(ledState?1:0); //if ledState is true then write a '1' (high) otherwise write a '0' (low)
-	// ledState = !ledState; //invert the ledState
-	// setTimeout(loop,1000); //call the indicated function after 1 second (1000 milliseconds)
-	var intervalIdN = 0;
-	var intervalIdO = 0;
-//	var intervalIdD = 0;
-//	var intervalIdE = 0;
 	var cumulativeMillisecs = 0;
 	var letterMsN = dashMillisecs + elementGapMillisecs + dotMillisecs;
 	var letterMsO = dashMillisecs + elementGapMillisecs + dashMillisecs + elementGapMillisecs + dashMillisecs;
@@ -161,14 +154,7 @@ function loop() {
 	var allLettersMillisecs =
 		letterMsN + letterGapMillisecs + letterMsO + letterGapMillisecs +
 		letterMsD + letterGapMillisecs + letterMsE + letterGapMillisecs;
-//	intervalIdN = setInterval( blinkLetterN, letterMsN, cumulativeMillisecs );
 	intervalIdNODE = setInterval( blinkAllLetters, allLettersMillisecs );
-//	cumulativeMillisecs += letterMsN;
-//	intervalIdO = setInterval( blinkLetterO, letterMsO, cumulativeMillisecs );
-//	cumulativeMillisecs += letterMsO;
-//	intervalIdD = setInterval( blinkLetterD, letterMsD, cumulativeMillisecs );
-//	cumulativeMillisecs += letterMsD;
-//	intervalIdE = setInterval( blinkLetterE, letterMsE, cumulativeMillisecs );
 }
 //
 // Mainline code
