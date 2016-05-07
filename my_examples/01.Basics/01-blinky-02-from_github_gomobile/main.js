@@ -29,6 +29,7 @@ var letterGapMillisecs  = 3 * dotMillisecs;
 //
 /**
  * Functions to blink out each of the letters we need
+ * These functions do not work as hoped and will probably be removed soon
  */
 function blinkLetterN( cumulativeMillisecs ) {
 	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
@@ -76,6 +77,40 @@ function blinkLetterE( cumulativeMillisecs ) {
 	return cumulativeMillisecs;
 };
 /**
+ * Blink out all the letters
+ * N          O                D              E
+ * dash dot   dash dash dash   dash dot dot   dot
+ */
+function blinkLettersNO() {
+	var cumulativeMillisecs = 0
+	//
+	// N: dash dot
+	//
+	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += dashMillisecs;
+	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += elementGapMillisecs;
+	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += dotMillisecs;
+	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += letterGapMillisecs;
+	//
+	// O: dash dash dash
+	//
+	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += dashMillisecs;
+	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += elementGapMillisecs;
+	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += dashMillisecs;
+	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += elementGapMillisecs;
+	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += dashMillisecs;
+	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
+	return cumulativeMillisecs;
+};
+/**
  * setup: called once in mainline code
  */
 function setup() {
@@ -102,7 +137,8 @@ function loop() {
 	var cumulativeMillisecs = 0;
 	var allLettersMillisecs =
 		letterMsN + letterGapMillisecs;
-	intervalIdN = setInterval( blinkLetterN, letterMsN, cumulativeMillisecs );
+//	intervalIdN = setInterval( blinkLetterN, letterMsN, cumulativeMillisecs );
+	intervalIdNO = setInterval( blinkLettersNO, 0 );
 //	cumulativeMillisecs += letterMsN;
 //	intervalIdO = setInterval( blinkLetterO, letterMsO, cumulativeMillisecs );
 //	cumulativeMillisecs += letterMsO;
