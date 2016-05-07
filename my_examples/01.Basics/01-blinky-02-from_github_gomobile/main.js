@@ -47,11 +47,11 @@ function loop() {
 	// myOnboardLed.write(ledState?1:0); //if ledState is true then write a '1' (high) otherwise write a '0' (low)
 	// ledState = !ledState; //invert the ledState
 	// setTimeout(loop,1000); //call the indicated function after 1 second (1000 milliseconds)
-	var letterTimeoutId = 0;
+	var letterIntervalId = 0;
 	var totalMillisecs =
 		dotMillisecs + elementGapMillisecs +
 		dashMillisecs + letterGapMillisecs;
-	letterTimeoutId = setTimeout(
+	letterIntervalId = setInterval(
 		function blinkLetter() {
 			var cumulativeMillisecs = 0;
 			setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
