@@ -83,7 +83,9 @@ function setup() {
 	myOnboardLed.dir(mraa.DIR_OUT); //set the gpio direction to output
 }
 /**
- * loop: called indefinitely by mainline code
+ * loop: blink out NODE indefinitely
+ * N          O                D              E
+ * dash dot   dash dash dash   dash dot dot   dot
  */
 function loop() {
 	// myOnboardLed.write(ledState?1:0); //if ledState is true then write a '1' (high) otherwise write a '0' (low)
@@ -91,8 +93,8 @@ function loop() {
 	// setTimeout(loop,1000); //call the indicated function after 1 second (1000 milliseconds)
 	var intervalIdN = 0;
 	var intervalIdO = 0;
-	var intervalIdD = 0;
-	var intervalIdE = 0;
+//	var intervalIdD = 0;
+//	var intervalIdE = 0;
 	var letterMsN = dashMillisecs + elementGapMillisecs + dotMillisecs + letterGapMillisecs;
 	var letterMsO = dashMillisecs + elementGapMillisecs + dashMillisecs + elementGapMillisecs + dashMillisecs + letterGapMillisecs;
 	var letterMsD = dashMillisecs + elementGapMillisecs + dotMillisecs + elementGapMillisecs + dotMillisecs + letterGapMillisecs;
@@ -101,12 +103,12 @@ function loop() {
 	var allLettersMillisecs =
 		letterMsN + letterGapMillisecs;
 	intervalIdN = setInterval( blinkLetterN, letterMsN, cumulativeMillisecs );
-	cumulativeMillisecs += letterMsN;
-	intervalIdO = setInterval( blinkLetterO, letterMsO, cumulativeMillisecs );
-	cumulativeMillisecs += letterMsO;
-	intervalIdD = setInterval( blinkLetterD, letterMsD, cumulativeMillisecs );
-	cumulativeMillisecs += letterMsD;
-	intervalIdE = setInterval( blinkLetterE, letterMsE, cumulativeMillisecs );
+//	cumulativeMillisecs += letterMsN;
+//	intervalIdO = setInterval( blinkLetterO, letterMsO, cumulativeMillisecs );
+//	cumulativeMillisecs += letterMsO;
+//	intervalIdD = setInterval( blinkLetterD, letterMsD, cumulativeMillisecs );
+//	cumulativeMillisecs += letterMsD;
+//	intervalIdE = setInterval( blinkLetterE, letterMsE, cumulativeMillisecs );
 }
 //
 // Mainline code
