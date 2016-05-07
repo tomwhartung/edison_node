@@ -81,7 +81,7 @@ function blinkLetterE( cumulativeMillisecs ) {
  * N          O                D              E
  * dash dot   dash dash dash   dash dot dot   dot
  */
-function blinkLettersNO() {
+function blinkAllLetters() {
 	var cumulativeMillisecs = 0
 	//
 	// N: dash dot
@@ -108,6 +108,28 @@ function blinkLettersNO() {
 	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
 	cumulativeMillisecs += dashMillisecs;
 	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += letterGapMillisecs;
+	//
+	// D: dash dot dot
+	//
+	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += dashMillisecs;
+	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += elementGapMillisecs;
+	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += dotMillisecs;
+	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += elementGapMillisecs;
+	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += dotMillisecs;
+	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += letterGapMillisecs;
+	//
+	// E: dot
+	//
+	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += dotMillisecs;
+	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
 	return cumulativeMillisecs;
 };
 /**
@@ -130,15 +152,17 @@ function loop() {
 	var intervalIdO = 0;
 //	var intervalIdD = 0;
 //	var intervalIdE = 0;
-	var letterMsN = dashMillisecs + elementGapMillisecs + dotMillisecs + letterGapMillisecs;
-	var letterMsO = dashMillisecs + elementGapMillisecs + dashMillisecs + elementGapMillisecs + dashMillisecs + letterGapMillisecs;
-	var letterMsD = dashMillisecs + elementGapMillisecs + dotMillisecs + elementGapMillisecs + dotMillisecs + letterGapMillisecs;
-	var letterMsE = dotMillisecs + letterGapMillisecs;
 	var cumulativeMillisecs = 0;
+	var letterMsN = dashMillisecs + elementGapMillisecs + dotMillisecs;
+	var letterMsO = dashMillisecs + elementGapMillisecs + dashMillisecs + elementGapMillisecs + dashMillisecs;
+	var letterMsD = dashMillisecs + elementGapMillisecs + dotMillisecs + elementGapMillisecs + dotMillisecs;
+	var letterMsE = dotMillisecs;
+	var intervalIdNODE = 0;
 	var allLettersMillisecs =
-		letterMsN + letterGapMillisecs;
+		letterMsN + letterGapMillisecs + letterMsO + letterGapMillisecs +
+		letterMsD + letterGapMillisecs + letterMsE + letterGapMillisecs;
 //	intervalIdN = setInterval( blinkLetterN, letterMsN, cumulativeMillisecs );
-	intervalIdNO = setInterval( blinkLettersNO, 0 );
+	intervalIdNODE = setInterval( blinkAllLetters, allLettersMillisecs );
 //	cumulativeMillisecs += letterMsN;
 //	intervalIdO = setInterval( blinkLetterO, letterMsO, cumulativeMillisecs );
 //	cumulativeMillisecs += letterMsO;
