@@ -19,24 +19,19 @@
 var mraa = require('mraa');           // require mraa
 var myOnboardLed = new mraa.Gpio(13); // LED hooked up to digital pin 13 (or built in pin on Intel Galileo Gen2 as well as Intel Edison)
 var ledState = true;                  // Boolean to hold the state of Led
+var dotMillisecs = 200;
+var dashMillisecs = 3 * dotMillisecs;
+var elementGapMillisecs = dotMillisecs;
+var letterGapMillisecs  = 3 * dotMillisecs;
 
 //
 // Functions
 //
 /**
- * function to do absolutely nothing
+ * ...
  */
-function doAbsolutelyNothing() {
-	console.log( 'I do nothing - absolutely nothing!' );
-}
-/**
- * Wait the specified milliseconds then call a function that does absolutely nothing
- */
-function sleepForMillisecs( millisecs ) {
-	var timeoutId = 0;
-	console.log( 'sleeping for ' + millisecs + ' milliseconds' );
-	timeoutId = setTimeout( doAbsolutelyNothing, millisecs );
-	clearTimeout( timeoutId );
+function doit() {
+	console.log( 'doing it' );
 }
 /**
  * setup: called once in mainline code
@@ -52,17 +47,26 @@ function loop() {
 	// myOnboardLed.write(ledState?1:0); //if ledState is true then write a '1' (high) otherwise write a '0' (low)
 	// ledState = !ledState; //invert the ledState
 	// setTimeout(loop,1000); //call the indicated function after 1 second (1000 milliseconds)
-	myOnboardLed.write( 0 );
-	sleepForMillisecs( 1000 );
-	myOnboardLed.write( 0 );
-	sleepForMillisecs( 100 );
+	var letterTimeoutId = 0;
+	var totalMillisecs =
+		dotMillisecs + elementGapMillisecs +
+		dashMillisecs + letterGapMillisecs;
+	letterTimeoutId = setTimeout(
+		function blinkLetter() {
+			var cumulativeMillisecs = 0;
+			setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
+			cumulativeMillisecs += dotMillisecs;
+			setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
+			cumulativeMillisecs += elementGapMillisecs;
+			setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
+			cumulativeMillisecs += dashMillisecs;
+			setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
+		}, totalMillisecs );
 }
 //
 // Mainline code
 //
 setup();
-//
-while( true ) {
-	loop();
-}
+
+loop();
 
