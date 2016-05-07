@@ -49,17 +49,17 @@ function loop() {
 	// setTimeout(loop,1000); //call the indicated function after 1 second (1000 milliseconds)
 	var letterIntervalId = 0;
 	var totalMillisecs =
-		dotMillisecs + elementGapMillisecs +
-		dashMillisecs + letterGapMillisecs;
+		dashMillisecs + elementGapMillisecs +
+		dotMillisecs + letterGapMillisecs;
 	letterIntervalId = setInterval(
 		function blinkLetter() {
 			var cumulativeMillisecs = 0;
 			setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
-			cumulativeMillisecs += dotMillisecs;
+			cumulativeMillisecs += dashMillisecs;
 			setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
 			cumulativeMillisecs += elementGapMillisecs;
 			setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
-			cumulativeMillisecs += dashMillisecs;
+			cumulativeMillisecs += dotMillisecs;
 			setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
 		}, totalMillisecs );
 }
