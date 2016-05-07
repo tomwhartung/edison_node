@@ -28,11 +28,19 @@ var letterGapMillisecs  = 3 * dotMillisecs;
 // Functions
 //
 /**
- * ...
+ * Functions to blink out each of the letters we need
  */
-function doit() {
-	console.log( 'doing it' );
-}
+function blinkLetterN() {
+	var cumulativeMillisecs = 0;
+	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += dashMillisecs;
+	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += elementGapMillisecs;
+	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += dotMillisecs;
+	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
+	return cumulativeMillisecs;
+};
 /**
  * setup: called once in mainline code
  */
@@ -48,20 +56,12 @@ function loop() {
 	// ledState = !ledState; //invert the ledState
 	// setTimeout(loop,1000); //call the indicated function after 1 second (1000 milliseconds)
 	var letterIntervalId = 0;
-	var totalMillisecs =
+	var letterNMillisecs =
 		dashMillisecs + elementGapMillisecs +
 		dotMillisecs + letterGapMillisecs;
-	letterIntervalId = setInterval(
-		function blinkLetter() {
-			var cumulativeMillisecs = 0;
-			setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
-			cumulativeMillisecs += dashMillisecs;
-			setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
-			cumulativeMillisecs += elementGapMillisecs;
-			setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
-			cumulativeMillisecs += dotMillisecs;
-			setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
-		}, totalMillisecs );
+	var allLettersMillisecs =
+		letterNMillisecs + letterGapMillisecs;
+	letterIntervalId = setInterval( blinkLetterN, letterNMillisecs );
 }
 //
 // Mainline code
