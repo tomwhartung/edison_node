@@ -28,55 +28,6 @@ var letterGapMillisecs  = 3 * dotMillisecs;
 // Functions
 //
 /**
- * Functions to blink out each of the letters we need
- * These functions do not work as hoped and will probably be removed soon
- */
-function blinkLetterN( cumulativeMillisecs ) {
-	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
-	cumulativeMillisecs += dashMillisecs;
-	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
-	cumulativeMillisecs += elementGapMillisecs;
-	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
-	cumulativeMillisecs += dotMillisecs;
-	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
-	return cumulativeMillisecs;
-};
-function blinkLetterO( cumulativeMillisecs ) {
-	
-	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
-	cumulativeMillisecs += dashMillisecs;
-	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
-	cumulativeMillisecs += elementGapMillisecs;
-	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
-	cumulativeMillisecs += dashMillisecs;
-	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
-	cumulativeMillisecs += elementGapMillisecs;
-	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
-	cumulativeMillisecs += dashMillisecs;
-	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
-	return cumulativeMillisecs;
-};
-function blinkLetterD( cumulativeMillisecs ) {
-	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
-	cumulativeMillisecs += dashMillisecs;
-	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
-	cumulativeMillisecs += elementGapMillisecs;
-	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
-	cumulativeMillisecs += dotMillisecs;
-	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
-	cumulativeMillisecs += elementGapMillisecs;
-	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
-	cumulativeMillisecs += dotMillisecs;
-	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
-	return cumulativeMillisecs;
-};
-function blinkLetterE( cumulativeMillisecs ) {
-	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
-	cumulativeMillisecs += dotMillisecs;
-	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
-	return cumulativeMillisecs;
-};
-/**
  * Blink out all the letters
  * N          O                D              E
  * dash dot   dash dash dash   dash dot dot   dot
