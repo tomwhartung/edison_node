@@ -30,12 +30,46 @@ var letterGapMillisecs  = 3 * dotMillisecs;
 /**
  * Functions to blink out each of the letters we need
  */
-function blinkLetterN() {
-	var cumulativeMillisecs = 0;
+function blinkLetterN( cumulativeMillisecs ) {
 	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
 	cumulativeMillisecs += dashMillisecs;
 	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
 	cumulativeMillisecs += elementGapMillisecs;
+	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += dotMillisecs;
+	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
+	return cumulativeMillisecs;
+};
+function blinkLetterO( cumulativeMillisecs ) {
+	
+	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += dashMillisecs;
+	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += elementGapMillisecs;
+	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += dashMillisecs;
+	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += elementGapMillisecs;
+	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += dashMillisecs;
+	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
+	return cumulativeMillisecs;
+};
+function blinkLetterD( cumulativeMillisecs ) {
+	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += dashMillisecs;
+	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += elementGapMillisecs;
+	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += dotMillisecs;
+	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += elementGapMillisecs;
+	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
+	cumulativeMillisecs += dotMillisecs;
+	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
+	return cumulativeMillisecs;
+};
+function blinkLetterE( cumulativeMillisecs ) {
 	setTimeout( function() { myOnboardLed.write( 1 ); }, cumulativeMillisecs );
 	cumulativeMillisecs += dotMillisecs;
 	setTimeout( function() { myOnboardLed.write( 0 ); }, cumulativeMillisecs );
@@ -55,13 +89,24 @@ function loop() {
 	// myOnboardLed.write(ledState?1:0); //if ledState is true then write a '1' (high) otherwise write a '0' (low)
 	// ledState = !ledState; //invert the ledState
 	// setTimeout(loop,1000); //call the indicated function after 1 second (1000 milliseconds)
-	var letterIntervalId = 0;
-	var letterNMillisecs =
-		dashMillisecs + elementGapMillisecs +
-		dotMillisecs + letterGapMillisecs;
+	var intervalIdN = 0;
+	var intervalIdO = 0;
+	var intervalIdD = 0;
+	var intervalIdE = 0;
+	var letterMsN = dashMillisecs + elementGapMillisecs + dotMillisecs + letterGapMillisecs;
+	var letterMsO = dashMillisecs + elementGapMillisecs + dashMillisecs + elementGapMillisecs + dashMillisecs + letterGapMillisecs;
+	var letterMsD = dashMillisecs + elementGapMillisecs + dotMillisecs + elementGapMillisecs + dotMillisecs + letterGapMillisecs;
+	var letterMsE = dotMillisecs + letterGapMillisecs;
+	var cumulativeMillisecs = 0;
 	var allLettersMillisecs =
-		letterNMillisecs + letterGapMillisecs;
-	letterIntervalId = setInterval( blinkLetterN, letterNMillisecs );
+		letterMsN + letterGapMillisecs;
+	intervalIdN = setInterval( blinkLetterN, letterMsN, cumulativeMillisecs );
+	cumulativeMillisecs += letterMsN;
+	intervalIdO = setInterval( blinkLetterO, letterMsO, cumulativeMillisecs );
+	cumulativeMillisecs += letterMsO;
+	intervalIdD = setInterval( blinkLetterD, letterMsD, cumulativeMillisecs );
+	cumulativeMillisecs += letterMsD;
+	intervalIdE = setInterval( blinkLetterE, letterMsE, cumulativeMillisecs );
 }
 //
 // Mainline code
