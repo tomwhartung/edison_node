@@ -17,19 +17,21 @@
  */
 
 var mraa = require('mraa'); //require mraa
-console.log('MRAA Version: ' + mraa.getVersion()); //write the mraa version to the console
 
+var ledPin2 = new mraa.Gpio(2);   // setup digital read on Digital pin #2 (D2)
+var ledPin3 = new mraa.Gpio(3);   // setup digital read on Digital pin #3 (D3)
 var ledPin4 = new mraa.Gpio(4);   // setup digital read on Digital pin #4 (D4)
-var ledPin5 = new mraa.Gpio(5);   // setup digital read on Digital pin #5 (D5)
-
-ledPin4.dir(mraa.DIR_OUT);        // set the gpio direction to output
-ledPin5.dir(mraa.DIR_OUT);        // set the gpio direction to output
 
 var LOW = 0;
 var HIGH = 1;
 
+var pin2State = LOW;
+var pin3State = HIGH;
 var pin4State = LOW;
-var pin5State = HIGH;
+
+var pin2CycleMs =  500;
+var pin3CycleMs = 1500;
+var pin4CycleMs = 2500;
 
 function toggleState( lowOrHigh ) {
    if ( lowOrHigh == LOW ) {
@@ -38,12 +40,42 @@ function toggleState( lowOrHigh ) {
       return LOW;
    }
 }
-function setStates() {
-   pin4State = toggleState( pin4State );
-   pin5State = toggleState( pin5State );
+function writeInitialStates() {
+   ledPin2.write( pin2State );
+   ledPin3.write( pin3State );
    ledPin4.write( pin4State );
-   ledPin5.write( pin5State );
 }
 
-var delay = 2500;
-setInterval( setStates, delay );
+function togglePin2State() {
+   pin2State = toggleState( pin2State );
+   ledPin2.write( pin2State );
+}
+function togglePin3State() {
+   pin3State = toggleState( pin3State );
+   ledPin3.write( pin3State );
+}
+function togglePin4State() {
+   pin4State = toggleState( pin4State );
+   ledPin4.write( pin4State );
+}
+
+/**
+ * Initialize our leds.
+ */
+function setup() {
+   console.log('MRAA Version: ' + mraa.getVersion()); //write the mraa version to the console
+   ledPin2.dir( mraa.DIR_OUT );        // set the gpio direction to output
+   ledPin3.dir( mraa.DIR_OUT );        // set the gpio direction to output
+   ledPin4.dir( mraa.DIR_OUT );        // set the gpio direction to output
+   writeInitialStates();
+}
+
+function loop() {
+   setInterval( togglePin2State, pin2CycleMs );
+   setInterval( togglePin3State, pin3CycleMs );
+   setInterval( togglePin4State, pin4CycleMs );
+}
+
+setup();
+
+loop();
