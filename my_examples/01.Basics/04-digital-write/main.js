@@ -21,6 +21,7 @@ var mraa = require('mraa'); //require mraa
 var ledPin2 = new mraa.Gpio(2);   // setup digital read on Digital pin #2 (D2)
 var ledPin3 = new mraa.Gpio(3);   // setup digital read on Digital pin #3 (D3)
 var ledPin4 = new mraa.Gpio(4);   // setup digital read on Digital pin #4 (D4)
+var ledPin5 = new mraa.Gpio(5);   // setup digital read on Digital pin #5 (D5)
 
 var LOW = 0;
 var HIGH = 1;
@@ -28,10 +29,12 @@ var HIGH = 1;
 var pin2State = LOW;
 var pin3State = HIGH;
 var pin4State = LOW;
+var pin5State = LOW;
 
-var pin2CycleMs =  500;
-var pin3CycleMs = 1500;
-var pin4CycleMs = 2500;
+var pin2CycleMs = 1000;
+var pin3CycleMs = 1000;
+var pin4CycleMs = 2000;
+var pin5CycleMs = 3000;
 
 function toggleState( lowOrHigh ) {
    if ( lowOrHigh == LOW ) {
@@ -44,6 +47,7 @@ function writeInitialStates() {
    ledPin2.write( pin2State );
    ledPin3.write( pin3State );
    ledPin4.write( pin4State );
+// ledPin5.write( pin5State );
 }
 
 function togglePin2State() {
@@ -58,6 +62,10 @@ function togglePin4State() {
    pin4State = toggleState( pin4State );
    ledPin4.write( pin4State );
 }
+function togglePin5State() {
+   pin5State = toggleState( pin5State );
+   ledPin5.write( pin5State );
+}
 
 /**
  * Initialize our leds.
@@ -67,6 +75,7 @@ function setup() {
    ledPin2.dir( mraa.DIR_OUT );        // set the gpio direction to output
    ledPin3.dir( mraa.DIR_OUT );        // set the gpio direction to output
    ledPin4.dir( mraa.DIR_OUT );        // set the gpio direction to output
+// ledPin5.dir( mraa.DIR_OUT );        // set the gpio direction to output
    writeInitialStates();
 }
 
@@ -74,6 +83,7 @@ function loop() {
    setInterval( togglePin2State, pin2CycleMs );
    setInterval( togglePin3State, pin3CycleMs );
    setInterval( togglePin4State, pin4CycleMs );
+// setInterval( togglePin5State, pin5CycleMs );
 }
 
 setup();
