@@ -68,12 +68,11 @@ function loop() {
    } else {
       turnOffPin4();
    }
-   setTimeout( loop, loopMs );
 }
 
 /*
  * Mainline: call setup and loop
  */
 setup();
-loop();
+setInterval( loop, loopMs );
 
