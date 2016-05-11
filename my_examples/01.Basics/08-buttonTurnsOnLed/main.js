@@ -33,12 +33,22 @@ var loopMs = 333;
  * Functions - useful subroutines
  */
 function turnOffPin4() {
-   console.log( 'Turning off pin4State ' );
+   myConsoleLog( 'Turning off pin4State ' );
    pin4Led.write( OFF );
 }
 function turnOnPin4() {
-   console.log( 'Turning on pin4State ' );
+   myConsoleLog( 'Turning on pin4State ' );
    pin4Led.write( ON );
+}
+/*
+ * Allow for running quietly, and for seeing the debug output when we want to see it
+ */
+// var DEBUG = ON;
+var DEBUG = OFF;
+function myConsoleLog( msg ) {
+   if ( DEBUG === ON ) {
+      console.log( msg );
+   }
 }
 
 /*
@@ -52,7 +62,7 @@ function setup() {
 
 function loop() {
    var pin8Value =  pin8Button.read();     // read the digital value of the pin
-   console.log( 'Gpio is ' + pin8Value );  // write the read value out to the console
+   myConsoleLog( 'Gpio is ' + pin8Value );  // write the read value out to the console
    if ( pin8Value == 1 ) {
       turnOnPin4();
    } else {
