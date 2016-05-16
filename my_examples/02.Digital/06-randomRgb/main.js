@@ -34,9 +34,9 @@ var ledPin2State = LOW;
 var ledPin3State = LOW;
 var ledPin4State = LOW;
 
-var ledPin2CycleMs = setRandomCycleMs( MIN_CYCLE_MS, MAX_CYCLE_MS );
-var ledPin3CycleMs = setRandomCycleMs( MIN_CYCLE_MS, MAX_CYCLE_MS );
-var ledPin4CycleMs = setRandomCycleMs( MIN_CYCLE_MS, MAX_CYCLE_MS );
+var led2CycleMs = setRandomCycleMs( MIN_CYCLE_MS, MAX_CYCLE_MS );
+var led3CycleMs = setRandomCycleMs( MIN_CYCLE_MS, MAX_CYCLE_MS );
+var led4CycleMs = setRandomCycleMs( MIN_CYCLE_MS, MAX_CYCLE_MS );
 
 /*
  * Functions to toggle and set states as appropriate
@@ -82,9 +82,9 @@ function togglePin5State() {
  */
 function setup() {
    console.log('MRAA Version: ' + mraa.getVersion()); //write the mraa version to the console
-   console.log( 'ledPin2CycleMs: ' + ledPin2CycleMs );
-   console.log( 'ledPin3CycleMs: ' + ledPin3CycleMs );
-   console.log( 'ledPin4CycleMs: ' + ledPin4CycleMs );
+   console.log( 'led2CycleMs: ' + led2CycleMs );
+   console.log( 'led3CycleMs: ' + led3CycleMs );
+   console.log( 'led4CycleMs: ' + led4CycleMs );
    ledPin2.dir( mraa.DIR_OUT );        // set the gpio direction to output
    ledPin3.dir( mraa.DIR_OUT );        // set the gpio direction to output
    ledPin4.dir( mraa.DIR_OUT );        // set the gpio direction to output
@@ -94,9 +94,9 @@ function setup() {
  * loop: set intervals to random values
  */
 function loop() {
-   setInterval( togglePin2State, ledPin2CycleMs );
-   setInterval( togglePin3State, ledPin3CycleMs );
-   setInterval( togglePin4State, ledPin4CycleMs );
+   setInterval( togglePin2State, led2CycleMs );
+   setInterval( togglePin3State, led3CycleMs );
+   setInterval( togglePin4State, led4CycleMs );
 }
 
 setup();
