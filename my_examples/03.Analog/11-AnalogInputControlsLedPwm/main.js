@@ -24,10 +24,12 @@ pwm3.enable(true);
 pwm3.period_us( 100 );        // set the period in microseconds.
 
 var analogPin0 = new mraa.Aio(0); //setup access analog input Analog pin #0 (A0)
-var analogValue = analogPin0.read();  // read the value of the analog pin
 
 setInterval(function () {
-    analogValue = analogPin0.read();      // read the value of the analog pin
-    pwm3.write( analogValue );        // Write duty cycle (brightness) value.
-    console.log( "analogValue: " + analogValue )
+   var analogIntegerValue = 0;
+   var analogFloatValue = 0.0;
+   analogIntegerValue = analogPin0.read();      // read the value of the analog pin
+   analogFloatValue = analogIntegerValue / 1024;
+   pwm3.write( analogFloatValue );        // Write duty cycle (brightness) value.
+   console.log( "analogIntegerValue: " + analogIntegerValue + "analogFloatValue: " + analogFloatValue )
 }, 100 );
