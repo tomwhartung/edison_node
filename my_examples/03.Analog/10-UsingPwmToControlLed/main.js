@@ -23,18 +23,21 @@ var pwm3 = new mraa.Pwm(3);   // Initialize PWM on Digital Pin #3 (D3) and enabl
 pwm3.enable(true);
 
 pwm3.period_us( 100 );     // set the period in microseconds.
-var brightness = 0.0;
-var delta = 0.05;
+
+var brightnessPercent = 0;   // use integers to set intermediate values (floats get messy)
+var brightnessValue = 0.0;   // the actual value needs to be in a float > 0 and < 1
+var deltaPercent = 5;        // use integers for the math
 
 setInterval(function () {
-    if ( 1.0 <= brightness ) {
-        delta = -0.05;
+    if ( 100 <= brightnessPercent ) {
+        deltaPercent = -5;
     }
-    else if ( brightness <= 0.0 ) {
-        delta = 0.05;
+    else if ( brightnessPercent <= 0 ) {
+        deltaPercent = 5;
     }
-    brightness += delta;
-    pwm3.write( brightness );      // Write duty cycle (brightness) value.
-    // console.log( pwm3.read() );    // read current brightness that is set before.
-    console.log( "brigntness: " + brightness + ";\t delta: " + delta );
+    brightnessPercent += deltaPercent;
+    brightnessValue = brightnessPercent / 100;    // Write duty cycle (brightness) value.
+    pwm3.write( brightnessValue );                // Write duty cycle (brightness) value.
+    // console.log( pwm3.read() );                // read current brightness that is set before.
+    console.log( "brigntnessPercent: " + brightnessPercent + ";\t deltaPercent: " + deltaPercent );
 }, 100 );
