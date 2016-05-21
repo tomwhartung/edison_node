@@ -30,13 +30,13 @@ var HIGH = 1;
 var MIN_CYCLE_MS =  500;
 var MAX_CYCLE_MS = 5000;
 
-var pin2State = LOW;
-var pin3State = LOW;
-var pin4State = LOW;
+var ledPin2State = LOW;
+var ledPin3State = LOW;
+var ledPin4State = LOW;
 
-var pin2CycleMs = setRandomCycleMs( MIN_CYCLE_MS, MAX_CYCLE_MS );
-var pin3CycleMs = setRandomCycleMs( MIN_CYCLE_MS, MAX_CYCLE_MS );
-var pin4CycleMs = setRandomCycleMs( MIN_CYCLE_MS, MAX_CYCLE_MS );
+var led2CycleMs = setRandomCycleMs( MIN_CYCLE_MS, MAX_CYCLE_MS );
+var led3CycleMs = setRandomCycleMs( MIN_CYCLE_MS, MAX_CYCLE_MS );
+var led4CycleMs = setRandomCycleMs( MIN_CYCLE_MS, MAX_CYCLE_MS );
 
 /*
  * Functions to toggle and set states as appropriate
@@ -47,9 +47,9 @@ function setRandomCycleMs( min, max ) {
    return Math.round( randomCycleMs );
 }
 function writeInitialStates() {
-   ledPin2.write( pin2State );
-   ledPin3.write( pin3State );
-   ledPin4.write( pin4State );
+   ledPin2.write( ledPin2State );
+   ledPin3.write( ledPin3State );
+   ledPin4.write( ledPin4State );
 }
 
 function toggleState( lowOrHigh ) {
@@ -61,16 +61,16 @@ function toggleState( lowOrHigh ) {
 }
 
 function togglePin2State() {
-   pin2State = toggleState( pin2State );
-   ledPin2.write( pin2State );
+   ledPin2State = toggleState( ledPin2State );
+   ledPin2.write( ledPin2State );
 }
 function togglePin3State() {
-   pin3State = toggleState( pin3State );
-   ledPin3.write( pin3State );
+   ledPin3State = toggleState( ledPin3State );
+   ledPin3.write( ledPin3State );
 }
 function togglePin4State() {
-   pin4State = toggleState( pin4State );
-   ledPin4.write( pin4State );
+   ledPin4State = toggleState( ledPin4State );
+   ledPin4.write( ledPin4State );
 }
 function togglePin5State() {
    pin5State = toggleState( pin5State );
@@ -82,9 +82,9 @@ function togglePin5State() {
  */
 function setup() {
    console.log('MRAA Version: ' + mraa.getVersion()); //write the mraa version to the console
-   console.log( 'pin2CycleMs: ' + pin2CycleMs );
-   console.log( 'pin3CycleMs: ' + pin3CycleMs );
-   console.log( 'pin4CycleMs: ' + pin4CycleMs );
+   console.log( 'led2CycleMs: ' + led2CycleMs );
+   console.log( 'led3CycleMs: ' + led3CycleMs );
+   console.log( 'led4CycleMs: ' + led4CycleMs );
    ledPin2.dir( mraa.DIR_OUT );        // set the gpio direction to output
    ledPin3.dir( mraa.DIR_OUT );        // set the gpio direction to output
    ledPin4.dir( mraa.DIR_OUT );        // set the gpio direction to output
@@ -94,9 +94,9 @@ function setup() {
  * loop: set intervals to random values
  */
 function loop() {
-   setInterval( togglePin2State, pin2CycleMs );
-   setInterval( togglePin3State, pin3CycleMs );
-   setInterval( togglePin4State, pin4CycleMs );
+   setInterval( togglePin2State, led2CycleMs );
+   setInterval( togglePin3State, led3CycleMs );
+   setInterval( togglePin4State, led4CycleMs );
 }
 
 setup();
