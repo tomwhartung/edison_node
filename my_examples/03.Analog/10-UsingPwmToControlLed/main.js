@@ -18,22 +18,18 @@ Using a ssh client:
 Article: https://software.intel.com/en-us/html5/articles/intel-xdk-iot-edition-nodejs-templates
 */
 
-var mraa = require("mraa"); //require mraa
-//Initialize PWM on Digital Pin #3 (D3) and enable the pwm pin
-var pwm3 = new mraa.Pwm(3);
+var mraa = require("mraa");   // require mraa
+var pwm3 = new mraa.Pwm(3);   // Initialize PWM on Digital Pin #3 (D3) and enable the pwm pin
 pwm3.enable(true);
 
-//set the period in microseconds.
-pwm3.period_us(2000);
+pwm3.period_us( 100 );     // set the period in microseconds.
 var value = 0.0;
 
 setInterval(function () {
-    if (value >= 1.0) {
+    if ( value >= 1.0 ) {
         value = 0.0;
     }
-    
     value = value + 0.03;
-    pwm3.write(value); //Write duty cycle value. 
-
-    console.log(pwm3.read());//read current value that is set before.
-}, 3000);
+    pwm3.write( value );         // Write duty cycle value. 
+    console.log( pwm3.read() );  // read current value that is set before.
+}, 100 );
