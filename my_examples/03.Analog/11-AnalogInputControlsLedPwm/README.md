@@ -1,6 +1,6 @@
-PWM App
+Using Analog Input to Control PWM
 ============================
-Pulse Width Modulation, or PWM, is a technique for getting analog results with digital means.
+Read analog input and use it to set the brightness of an LED on one of the Pulse Width Modulation, or PWM pins
 
 A simple node.js application intended to read and write analog values to fade a LED from Digital pins (PWM) on the Intel based development boards such as the Intel(R) Galileo and Edison with Arduino breakout board.
 
