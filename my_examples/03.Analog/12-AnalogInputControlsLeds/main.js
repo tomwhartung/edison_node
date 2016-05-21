@@ -2,9 +2,7 @@
 /*jshint unused:true */
 
 /*
- * Pulse Width Modulation, or PWM, is a technique for getting analog results with digital means.
- * A simple node.js application that reads and write analog values to fade a LED from Digital pins on the Intel based development boards such as the Intel(R) Galileo and Edison with Arduino breakout board.
- *
+ * Read analog input and use it to control the length of the on-off cycles of more thnan one LED.
  * MRAA - Low Level Skeleton Library for Communication on GNU/Linux platforms
  * Library in C/C++ to interface with Galileo & other Intel platforms, in a structured and sane API with port nanmes/numbering that match boards & with bindings to javascript & python.
  *
@@ -16,11 +14,16 @@
  * Article: https://software.intel.com/en-us/html5/articles/intel-xdk-iot-edition-nodejs-templates
  */
 
-var mraa = require("mraa");       // require mraa
-var pwm3 = new mraa.Pwm(3);       // Initialize PWM on Digital Pin #3 (D3) and enable the pwm pin
-pwm3.enable(true);
-pwm3.period_us( 100 );            // set the period in microseconds.
+var mraa = require("mraa");         // require mraa
 var analogPin0 = new mraa.Aio(0); // setup access analog input Analog pin #0 (A0)
+var ledPin2 = new mraa.Gpio(2);   // Initialize LED on Digital Pin #2 (D2)
+var ledPin4 = new mraa.Gpio(4);   // Initialize LED on Digital Pin #2 (D2)
+
+function setup() {
+   console.log('MRAA Version: ' + mraa.getVersion());
+   ledPin2.dir( mraa.DIR_OUT );        // set the gpio direction to output
+   ledPin4.dir( mraa.DIR_OUT );        // set the gpio direction to output
+}
 
 setInterval(function () {
    var analogIntegerValue = 0;
@@ -30,3 +33,6 @@ setInterval(function () {
    pwm3.write( analogFloatValue );        // Write duty cycle (brightness) value.
    console.log( "analogIntegerValue: " + analogIntegerValue + "; analogFloatValue: " + analogFloatValue )
 }, 100 );
+
+setup();
+
