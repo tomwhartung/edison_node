@@ -21,23 +21,13 @@ Article: https://software.intel.com/en-us/html5/articles/intel-xdk-iot-edition-n
 var mraa = require("mraa");   // require mraa
 var pwm3 = new mraa.Pwm(3);   // Initialize PWM on Digital Pin #3 (D3) and enable the pwm pin
 pwm3.enable(true);
+pwm3.period_us( 100 );        // set the period in microseconds.
 
-pwm3.period_us( 100 );     // set the period in microseconds.
-
-var brightnessPercent = 0;   // use integers to set intermediate values (floats get messy)
-var brightnessValue = 0.0;   // the actual value needs to be in a float > 0 and < 1
-var deltaPercent = 5;        // use integers for the math
+var analogPin0 = new mraa.Aio(0); //setup access analog input Analog pin #0 (A0)
+var analogValue = analogPin0.read();  // read the value of the analog pin
 
 setInterval(function () {
-    if ( 100 <= brightnessPercent ) {
-        deltaPercent = -5;
-    }
-    else if ( brightnessPercent <= 0 ) {
-        deltaPercent = 5;
-    }
-    brightnessPercent += deltaPercent;
-    brightnessValue = brightnessPercent / 100;    // Write duty cycle (brightness) value.
-    pwm3.write( brightnessValue );                // Write duty cycle (brightness) value.
-    // console.log( pwm3.read() );                // read current brightness that is set before.
-    console.log( "brigntnessPercent: " + brightnessPercent + ";\t deltaPercent: " + deltaPercent );
+    analogValue = analogPin0.read();      // read the value of the analog pin
+    pwm3.write( analogValue );        // Write duty cycle (brightness) value.
+    console.log( "analogValue: " + analogValue )
 }, 100 );
