@@ -55,14 +55,18 @@ var savedIntervalId = 0;                        // ... kill the currently runnin
 
 function loop() {
 	currentAnalogValue = analogPin0.read();
-	savedAnalogrValue = currentAnalogrValue;
-	savedAnalogrValue = currentAnalogrValue;
-	setInterval(function () {
-		analogIntegerValue = analogPin0.read();      // read the value of the analog pin
-		analogFloatValue = analogIntegerValue / 1024;
-		pwm3.write( analogFloatValue );        // Write duty cycle (brightness) value.
-		console.log( "analogIntegerValue: " + analogIntegerValue + "; analogFloatValue: " + analogFloatValue )
-	}, 100 );
+	if( currentAnalogValue == savedAnalogValue ) {
+		console.log( 'value unchanged' );
+	} else {
+		savedAnalogValue = currentAnalogValue;
+		if( savedIntervalId != 0 ) {
+			clearInterval( savedIntervalId );
+		}
+		savedIntervalId = setInterval(function () {
+			toggleLeds();
+		}, currentAnalogValue );
+		console.log( "currentAnalogValue: " + currentAnalogValue );
+	}
 )
 
 setup();
