@@ -17,6 +17,8 @@
 var mraa = require("mraa");         // require mraa
 
 var analogPin0 = new mraa.Aio(0); // setup access analog input Analog pin #0 (A0)
+const maxAnalogValue = 1024;      // maximum value returned when reading analog in
+
 var ledPin2 = new mraa.Gpio(2);   // Initialize LED on Digital Pin #2 (D2)
 var ledPin4 = new mraa.Gpio(4);   // Initialize LED on Digital Pin #2 (D2)
 
@@ -70,6 +72,5 @@ function loop() {
 
 setup();
 
-setInterval(function () {
-	loop();
-}, 100 );
+setInterval( loop(), maxAnalogValue );
+
