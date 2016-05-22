@@ -43,10 +43,11 @@ function toggleState( stateIn ) {
 }
 
 function toggleLeds() {
+	console.log( 'toggling states' );
 	led2State = toggleState( led2State );
 	led4State = toggleState( led4State );
 	ledPin2.write( led2State );
-	ledPin4.write( led2State );
+	ledPin4.write( led4State );
 }
 
 var currentAnalogValue = analogPin0.read();     // read the value of the analog pin
@@ -62,12 +63,10 @@ function loop() {
 		if( savedIntervalId != 0 ) {
 			clearInterval( savedIntervalId );
 		}
-		savedIntervalId = setInterval(function () {
-			toggleLeds();
-		}, currentAnalogValue );
+		savedIntervalId = setInterval( toggleLeds, currentAnalogValue );
 		console.log( "currentAnalogValue: " + currentAnalogValue );
 	}
-)
+}
 
 setup();
 
