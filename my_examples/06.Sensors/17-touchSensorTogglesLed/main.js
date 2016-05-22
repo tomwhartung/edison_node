@@ -20,13 +20,13 @@
 
 var mraa = require('mraa'); //require mraa
 
-var pin8Button = new mraa.Gpio( 8 ); // setup digital read on Digital pin #6 (D6)
-var pin4Led = new mraa.Gpio( 4 );    // setup digital read on Digital pin #4 (D4)
+var pin7Sensor = new mraa.Gpio( 7 ); // setup digital read on Digital pin #7 (D7)
+var pin2Led = new mraa.Gpio( 2 );    // setup digital read on Digital pin #2 (D2)
 
 var OFF = 0;
 var ON = 1;
 
-var pin4State = ON;
+var pin2State = ON;
 var loopMs = 200;
 
 /*
@@ -39,34 +39,34 @@ function toggleState( offOrOn ) {
       return OFF;
    }
 }
-function togglePin4() {
-   pin4State = toggleState( pin4State );
-   console.log( 'pin4State = ' + pin4State );
-   pin4Led.write( pin4State );
+function togglePin2() {
+   pin2State = toggleState( pin2State );
+   console.log( 'pin2State = ' + pin2State );
+   pin2Led.write( pin2State );
 }
 
-/*
- * Functions - setup and loop
+/**
+ * Setup pin 7 as the input sensor and pin2 as the output led
  */
 function setup() {
    console.log('MRAA Version: ' + mraa.getVersion()); //write the mraa version to the console
-   pin8Button.dir( mraa.DIR_IN );   // button: set the gpio direction to input
-   pin4Led.dir( mraa.DIR_OUT );     // led: set the gpio direction to output
+   pin7Sensor.dir( mraa.DIR_IN );   // button: set the gpio direction to input
+   pin2Led.dir( mraa.DIR_OUT );     // led: set the gpio direction to output
 }
-
+/**
+ * Recursive loop loops forever
+ */
 function loop() {
-   var pin8Value =  pin8Button.read();     // read the digital value of the pin
+   var pin8Value =  pin7Sensor.read();     // read the digital value of the pin
    console.log( 'Gpio is ' + pin8Value );  // write the read value out to the console
    if ( pin8Value == 1 ) {
-      console.log( 'Toggling pin 4' );
-      togglePin4();
+      console.log( 'Toggling pin 2' );
+      togglePin2();
    }
    setTimeout( loop, loopMs );
 }
 
-/*
- * Mainline: call setup and loop
- */
 setup();
+
 loop();
 
