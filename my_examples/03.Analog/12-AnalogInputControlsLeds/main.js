@@ -16,8 +16,11 @@
 
 var mraa = require("mraa");         // require mraa
 
-var analogPin0 = new mraa.Aio(0); // setup access analog input Analog pin #0 (A0)
-const maxAnalogValue = 1024;      // maximum value returned when reading analog in
+var analogPin0 = new mraa.Aio(0);             // setup access analog input Analog pin #0 (A0)
+var currentAnalogValue = analogPin0.read();   // read the value of the analog pin
+var savedAnalogValue = currentAnalogValue;    // when the analog input value changes ...
+var savedIntervalId = 0;                      // ... kill the currently running interval and start a new one
+const maxAnalogValue = 1024;                  // maximum value returned when reading analog in
 
 var ledPin2 = new mraa.Gpio(2);   // Initialize LED on Digital Pin #2 (D2)
 var ledPin4 = new mraa.Gpio(4);   // Initialize LED on Digital Pin #2 (D2)
@@ -27,6 +30,9 @@ const HIGH = 1;
 var led2State = LOW;
 var led4State = HIGH;
 
+/**
+ * Set the direction on the leds and set their initial values
+ */
 function setup() {
 	console.log('MRAA Version: ' + mraa.getVersion());
 	ledPin2.dir( mraa.DIR_OUT );        // set the gpio direction to output
@@ -35,6 +41,10 @@ function setup() {
 	ledPin4.write( led2State );
 }
 
+/**
+ * I am not a fan of the "x = !y;" type statements we see sometimes, plus
+ * it's a no-brainer to write a simple function that respects the diff between booleans and integers
+ */
 function toggleState( stateIn ) {
 	if ( stateIn == LOW ) {
 		return HIGH;
@@ -44,6 +54,9 @@ function toggleState( stateIn ) {
 	}
 }
 
+/**
+ * toggle the state of both leds
+ */
 function toggleLeds() {
 	console.log( 'toggling states' );
 	led2State = toggleState( led2State );
@@ -52,10 +65,11 @@ function toggleLeds() {
 	ledPin4.write( led4State );
 }
 
-var currentAnalogValue = analogPin0.read();     // read the value of the analog pin
-var savedAnalogValue = currentAnalogValue;      // when the analog input value changes ...
-var savedIntervalId = 0;                        // ... kill the currently running interval and start a new one
-
+/**
+ * Main loop that reads the analog in and sets the interval to toggle the leds accordingly
+ * Note that we cannot set the intervals up so that we run the loop that
+ * reads the analog value more frequently than we toggle the leds
+ */
 function loop() {
 	currentAnalogValue = analogPin0.read();
 	if( currentAnalogValue == savedAnalogValue ) {
@@ -72,5 +86,5 @@ function loop() {
 
 setup();
 
-setInterval( loop(), maxAnalogValue );
+setInterval( loop, maxAnalogValue );
 
