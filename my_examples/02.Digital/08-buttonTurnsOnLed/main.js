@@ -20,7 +20,7 @@
 
 var mraa = require('mraa'); //require mraa
 
-var pin8Button = new mraa.Gpio( 8 ); // setup digital read on Digital pin #6 (D6)
+var pin8Button = new mraa.Gpio( 8 ); // setup digital read on Digital pin #7 (D7)
 var pin4Led = new mraa.Gpio( 4 );    // setup digital read on Digital pin #4 (D4)
 
 var OFF = 0;
