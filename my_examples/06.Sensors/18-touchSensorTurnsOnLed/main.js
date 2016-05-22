@@ -20,53 +20,55 @@
 
 var mraa = require('mraa'); //require mraa
 
-var pin8Button = new mraa.Gpio( 8 ); // setup digital read on Digital pin #6 (D6)
-var pin4Led = new mraa.Gpio( 4 );    // setup digital read on Digital pin #4 (D4)
+var pin7Sensor = new mraa.Gpio( 7 ); // setup digital read on Digital pin #7 (D7)
+var pin2Led = new mraa.Gpio( 4 );    // setup digital read on Digital pin #4 (D4)
 
 var OFF = 0;
 var ON = 1;
 
-var pin4State = OFF;
+var pin2State = OFF;
 var loopMs = 333;
 
 /*
  * Functions - useful subroutines
  */
-function turnOffPin4() {
-   myConsoleLog( 'Turning off pin4State ' );
-   pin4Led.write( OFF );
+function turnOffPin2() {
+   myConsoleLog( 'Turning off pin2State ' );
+   pin2Led.write( OFF );
 }
-function turnOnPin4() {
-   myConsoleLog( 'Turning on pin4State ' );
-   pin4Led.write( ON );
+function turnOnPin2() {
+   myConsoleLog( 'Turning on pin2State ' );
+   pin2Led.write( ON );
 }
 /*
  * Allow for running quietly, and for seeing the debug output when we want to see it
  */
-// var DEBUG = ON;
-var DEBUG = OFF;
+var DEBUG = ON;
+// var DEBUG = OFF;
 function myConsoleLog( msg ) {
    if ( DEBUG === ON ) {
       console.log( msg );
    }
 }
 
-/*
- * Functions - setup and loop
+/**
+ * Setup the sensor input on pin 7 and the led as output on pin 2
  */
 function setup() {
-   console.log('MRAA Version: ' + mraa.getVersion()); //write the mraa version to the console
-   pin8Button.dir( mraa.DIR_IN );   // button: set the gpio direction to input
-   pin4Led.dir( mraa.DIR_OUT );     // led: set the gpio direction to output
+   console.log( 'MRAA Version: ' + mraa.getVersion() );
+   pin7Sensor.dir( mraa.DIR_IN );   // button: set the gpio direction to input
+   pin2Led.dir( mraa.DIR_OUT );     // led: set the gpio direction to output
 }
-
+/**
+ * This loop is called by setInterval and is not recursive
+ */
 function loop() {
-   var pin8Value =  pin8Button.read();     // read the digital value of the pin
-   myConsoleLog( 'Gpio is ' + pin8Value );  // write the read value out to the console
-   if ( pin8Value == 1 ) {
-      turnOnPin4();
+   var pin7Value =  pin7Sensor.read();      // read the digital value of the pin
+   myConsoleLog( 'Gpio is ' + pin7Value );  // write the read value out to the console
+   if ( pin7Value == 1 ) {
+      turnOnPin2();
    } else {
-      turnOffPin4();
+      turnOffPin2();
    }
 }
 
