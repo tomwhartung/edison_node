@@ -15,24 +15,58 @@
  */
 
 var mraa = require("mraa");         // require mraa
+
 var analogPin0 = new mraa.Aio(0); // setup access analog input Analog pin #0 (A0)
 var ledPin2 = new mraa.Gpio(2);   // Initialize LED on Digital Pin #2 (D2)
 var ledPin4 = new mraa.Gpio(4);   // Initialize LED on Digital Pin #2 (D2)
 
+const LOW = 0;
+const HIGH = 1;
+var led2State = LOW;
+var led4State = HIGH;
+
 function setup() {
-   console.log('MRAA Version: ' + mraa.getVersion());
-   ledPin2.dir( mraa.DIR_OUT );        // set the gpio direction to output
-   ledPin4.dir( mraa.DIR_OUT );        // set the gpio direction to output
+	console.log('MRAA Version: ' + mraa.getVersion());
+	ledPin2.dir( mraa.DIR_OUT );        // set the gpio direction to output
+	ledPin4.dir( mraa.DIR_OUT );        // set the gpio direction to output
+	ledPin2.write( led2State );
+	ledPin4.write( led2State );
 }
 
-setInterval(function () {
-   var analogIntegerValue = 0;
-   var analogFloatValue = 0.0;
-   analogIntegerValue = analogPin0.read();      // read the value of the analog pin
-   analogFloatValue = analogIntegerValue / 1024;
-   pwm3.write( analogFloatValue );        // Write duty cycle (brightness) value.
-   console.log( "analogIntegerValue: " + analogIntegerValue + "; analogFloatValue: " + analogFloatValue )
-}, 100 );
+function toggleState( stateIn ) {
+	if ( stateIn == LOW ) {
+		return HIGH;
+	}
+	else {
+		return LOW;
+	}
+}
+
+function toggleLeds() {
+	led2State = toggleState( led2State );
+	led4State = toggleState( led4State );
+	ledPin2.write( led2State );
+	ledPin4.write( led2State );
+}
+
+var currentAnalogValue = analogPin0.read();     // read the value of the analog pin
+var savedAnalogValue = currentAnalogValue;      // when the analog input value changes ...
+var savedIntervalId = 0;                        // ... kill the currently running interval and start a new one
+
+function loop() {
+	currentAnalogValue = analogPin0.read();
+	savedAnalogrValue = currentAnalogrValue;
+	savedAnalogrValue = currentAnalogrValue;
+	setInterval(function () {
+		analogIntegerValue = analogPin0.read();      // read the value of the analog pin
+		analogFloatValue = analogIntegerValue / 1024;
+		pwm3.write( analogFloatValue );        // Write duty cycle (brightness) value.
+		console.log( "analogIntegerValue: " + analogIntegerValue + "; analogFloatValue: " + analogFloatValue )
+	}, 100 );
+)
 
 setup();
 
+setInterval(function () {
+	loop();
+}, 100 );
