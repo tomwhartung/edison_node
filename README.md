@@ -2,7 +2,9 @@
 
 JavaScript (JS) programs written for the Intel Edison using node.
 
-## NOTE: We must run these examples as root!!
+#### NOTE: We must run these examples as root!!
+
+#### NOTE: This is all still a work in progress!!
 
 # Subdirectories
 
@@ -20,4 +22,7 @@ These demo programs were inspired by the arduino versions, the node demos, and t
 For information pertaining to all programs, see the README for repository containing the arduino versions:
 
 * edison_arduino repo at https://github.com/tomwhartung/edison_arduino
+
+See the edison_arduino repo's README for configuration info: what actuators and sensors should be connected to which pins.
+
 
