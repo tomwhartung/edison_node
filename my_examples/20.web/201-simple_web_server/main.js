@@ -24,7 +24,7 @@ console.log('MRAA Version: ' + mraa.getVersion()); //write the mraa version to t
 // Start by loading in some data
 var fs = require('fs');
 
-var lightSensorPage = fs.readFileSync('/node_app_slot/lightsensor.html');
+var lightSensorPage = fs.readFileSync('lightsensor.html');
 
 // Insert the ip address in the code in the page
 
