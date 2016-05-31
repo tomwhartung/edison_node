@@ -1,0 +1,16 @@
+{
+	"repoName":"iotapp-template-lcd-driver",
+	"title":"LCD with backlight driver and demonstrator",
+	"tooltip":"A node.js based app that can work with the UPM library or directly with the I2C bus",
+	"description":"A node.js based app that can work with the UPM library or directly with the I2C bus",
+	"articleurl":"https://software.intel.com/en-us/xdk-sample-creating-lcd-display-app",
+    "screenshotUrl":"",
+    "iconUrl":"",
+	"highlights":["I2C"],
+    "keywords":["I2C"],
+	"visible": true,
+	"apppreview":false,
+	"appname":"demo.lcd",
+	"relname":"4.0.0",
+	"projectTypeName": "com.intel.xdk.projecttype.iotapp"
+}
