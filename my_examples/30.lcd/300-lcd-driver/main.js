@@ -15,7 +15,8 @@
 /*jshint unused:true */
 
 // change this to false to use the hand rolled version
-var useUpmVersion = true;
+// var useUpmVersion = true;
+var useUpmVersion = false;
 
 // we want mraa to be at least version 0.6.1
 var mraa = require('mraa');
