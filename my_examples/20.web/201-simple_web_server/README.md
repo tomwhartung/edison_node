@@ -2,6 +2,8 @@ A Web Server App
 ============================
 A simple node.js application to demonstrate some of the possibilities of using the board to serve data to a web page.
 
+Initial version copied from: https://github.com/gomobile/iotapp-template-simple-web-server
+
 The sample app reads the value of the light sensor and serves it as JSON to a web page, that is also served by the app.
 
 To run the app:
