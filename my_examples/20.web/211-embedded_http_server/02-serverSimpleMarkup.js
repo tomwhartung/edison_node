@@ -1,6 +1,8 @@
 /**
  * Web server inpsired by Node.js for Embedded Systems by Patrick Mulder
- *
+ * This version serves some very simple markup.
+ * Hey, unless I tried it, I would not know how this markup might be rendered,
+ *   and now I know.
  */
 var http = require( 'http' );
 
